@@ -1,0 +1,7 @@
+
+redux
+react-redux
+redux thunk
+redux toolkit
+rtk query
+redux saga
