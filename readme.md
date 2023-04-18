@@ -8,38 +8,48 @@
 
 #### For plain Redux Toolkit **template**
 
-`npx create-react-app my-app --template redux`
+```
+npx create-react-app my-app --template redux 
+```
 
 #### Redux **installation** and **Bindings** with react
 
-    `npm install @reduxjs/toolkit`
-    `npm install react-redux` (because React not recognise redux state)
+    ```
+    npm install @reduxjs/toolkit
+    npm install react-redux 
+    ```    
+  #####(because React not recognise redux state)
 
 ### Set up **store** in In app folder /store.js
 
 ---
 
-    `import { configureStore } from '@reduxjs/toolkit
+    ```
+    import { configureStore } from '@reduxjs/toolkit'
         export default configureStore({
           reducer: {},
-        })`
+    })
+    ```    
 
 ### Set up **provider** In index.js if vite than main.jsx
 
 ---
 
-    `import store from './app/store'
-     import { Provider } from 'react-redux'
+    ```
+    import store from './app/store'
+    import { Provider } from 'react-redux'
 
         <Provider store={store}>
             <App />
-        </Provider>`
+        </Provider>
+     ```   
 
 ### In feature folder/[slices-feature] filename name
 
 ---
 
-    `import { createSlice } from "@reduxjs/toolkit";
+    ```
+    import { createSlice } from "@reduxjs/toolkit";
 
         const initialState = {
             //Object
@@ -49,7 +59,7 @@
             //String
         };
 
-        export const nameOfSlice = createSlice({
+        export const [nameOfSlice] = createSlice({
           name: "[name of slice]",
           initialState,
           reducers: {
@@ -60,22 +70,25 @@
           },
         });
 
-        export const { Income, Groceries, Entertainment, Bills } = Counter.actions;
+        export const { Income, Groceries, Entertainment, Bills } = [nameOfSlice].actions;
         export const readIncome = (state) => state.counter.value
-        export default counterSlice.reducer`
+        export default [nameOfSlice].reducer
+       ``` 
 
 ### **Configure** Slice In app/store.js
 
 ---
 
-    `import { configureStore } from '@reduxjs/toolkit'
+    ```
+    import { configureStore } from '@reduxjs/toolkit'
      import counterReducer from '../features/counter/counterSlice'
 
      export default configureStore({
        reducer: {
          counter: counterReducer,
        },
-     })`
+     })
+     ```
 
 ### useSelector - For **select global state** from store
 
@@ -85,7 +98,8 @@
 
     import React from 'react'
 
-    ` import { useSelector, useDispatch } from 'react-redux'
+    ```
+    import { useSelector, useDispatch } from 'react-redux'
       import { decrement, increment } from './counterSlice'
       import {readIncome} from "../feature/counterSlice";
       import styles from './Counter.module.css'
@@ -113,7 +127,8 @@
           </div>
         </div>
       )
-    }`
+    }
+    ```
 
 ### Take **action according to the another slice**
 
@@ -128,10 +143,12 @@
 - action is account's state
 - state meaning this page's points
 
-          `extraReducers: (builder) => {
+          ```
+          extraReducers: (builder) => {
                 builder.addCase(incrementByAmount, (state, action) => {
                   if (action.payload >= 100) state.points++;
             });
-          }`
+          }
+          ```
 
 > **In this repo implimated if account balance increment by >100 than add 1 bonas point.**
